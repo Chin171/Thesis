@@ -1,11 +1,9 @@
-Reference:
-1. Rodin: an open toolset for modelling and reasoning in Event-B: https://eprints.soton.ac.uk/271058/1/main.pdf
-2.Event-B patterns and their tool support: https://www.research-collection.ethz.ch/server/api/core/bitstreams/e8cd8212-d14f-43f0-a42f-05d2b3b41df6/content
-3. Decomposition Structures for Event-B: https://link.springer.com/chapter/10.1007/978-3-642-00255-7_2 
-Khái niệm cơ bản về Event-B
-# Báo cáo: **Event-B — Khái niệm, lý thuyết và cơ chế hoạt động**
+#Reference:
+#1. Rodin: an open toolset for modelling and reasoning in Event-B: https://eprints.soton.ac.uk/271058/1/main.pdf  
+#2.Event-B patterns and their tool support: https://www.research-collection.ethz.ch/server/api/core/bitstreams/e8cd8212-d14f-43f0-a42f-05d2b3b41df6/content.   
+#3. Decomposition Structures for Event-B: https://link.springer.com/chapter/10.1007/978-3-642-00255-7_2 
+#**Event-B — Khái niệm, lý thuyết và cơ chế hoạt động**
 
-*Phong cách: khoa học, chi tiết. Độ dài: ~3 trang A4.*
 
 ---
 
