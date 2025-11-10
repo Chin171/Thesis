@@ -137,7 +137,6 @@ END
 **Phân tích PO**: Rodin sẽ sinh PO để chứng minh rằng sau `add_user` hoặc `remove_user`, `inv1` và `inv2` vẫn giữ đúng. Ví dụ, với `add_user`, cần chứng minh `card(users ∪ {u}) ≤ maxUsers` khi `card(users) < maxUsers` — điều này đúng nhờ bất biến và guard.
 Dưới đây là phiên bản **Markdown** của đoạn bạn đưa, được format rõ ràng, có header, code block và bảng để dễ đọc:
 
-````markdown
 # Phân tích Proof Obligations (PO) – Hệ thống USERS
 
 ## 1. Tóm tắt mô hình
@@ -177,9 +176,10 @@ Rodin tự động sinh các loại PO sau:
 ## 3. Phân tích PO chi tiết
 
 ### (A) Initialisation PO
-```event-b
+```text
 act0: users ≔ ∅
-````
+
+
 
 **Cần chứng minh**: Sau khi khởi tạo, các invariant `inv1` và `inv2` đều đúng.
 
@@ -311,11 +311,4 @@ Context (C1) ──► Machine (M1)
                    └── remove_user → PO(WD), PO(FIS), PO(inv1), PO(inv2)
 ```
 
-```
 
----
-
-Mình có thể tiếp tục **chèn thêm code block Event-B đầy đủ và đánh số PO giống như Rodin** để tài liệu Markdown trở thành bản “verification report” hoàn chỉnh cho khóa luận.  
-
-Bạn có muốn mình làm luôn không?
-```
