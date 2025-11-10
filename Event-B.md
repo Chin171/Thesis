@@ -135,40 +135,66 @@ END
 ```
 
 **Phân tích PO**: Rodin sẽ sinh PO để chứng minh rằng sau `add_user` hoặc `remove_user`, `inv1` và `inv2` vẫn giữ đúng. Ví dụ, với `add_user`, cần chứng minh `card(users ∪ {u}) ≤ maxUsers` khi `card(users) < maxUsers` — điều này đúng nhờ bất biến và guard.
-1. Tóm tắt mô hình
-Context C1
-USER: tập hợp người dùng trừu tượng (một carrier set).
-maxUsers: hằng số, số lượng người dùng tối đa.
-Axioms:
-maxUsers ∈ ℕ
-maxUsers > 0
-→ Đây là phần “nền tảng toán học” cho machine, đảm bảo rằng maxUsers có nghĩa.
-Machine M1
-Biến trạng thái: users (tập con của USER).
-Bất biến (invariants):
-inv1: users ⊆ USER
-inv2: card(users) ≤ maxUsers
-Khởi tạo: users ≔ ∅
-Sự kiện: add_user, remove_user
-2. Các loại Proof Obligations sinh ra
+Dưới đây là phiên bản **Markdown** của đoạn bạn đưa, được format rõ ràng, có header, code block và bảng để dễ đọc:
+
+````markdown
+# Phân tích Proof Obligations (PO) – Hệ thống USERS
+
+## 1. Tóm tắt mô hình
+
+### Context C1
+- **USER**: tập hợp người dùng trừu tượng (một *carrier set*).  
+- **maxUsers**: hằng số, số lượng người dùng tối đa.  
+- **Axioms**:
+  - `maxUsers ∈ ℕ`
+  - `maxUsers > 0`  
+
+> Đây là phần “nền tảng toán học” cho Machine, đảm bảo rằng `maxUsers` có nghĩa.
+
+### Machine M1
+- **Biến trạng thái**: `users` (tập con của `USER`).  
+- **Bất biến (invariants)**:
+  - `inv1: users ⊆ USER`
+  - `inv2: card(users) ≤ maxUsers`  
+- **Khởi tạo**: `users ≔ ∅`  
+- **Sự kiện**: `add_user`, `remove_user`  
+
+---
+
+## 2. Các loại Proof Obligations sinh ra
+
 Rodin tự động sinh các loại PO sau:
-Loại PO	Ý nghĩa
-WD (Well-Definedness)	Đảm bảo các biểu thức có nghĩa toán học
-INV (Invariant Preservation)	Kiểm chứng các invariant luôn đúng sau mỗi event
-FIS (Feasibility)	Chứng minh hành động trong event có thể thực hiện được
-INIT (Initialisation)	Chứng minh trạng thái khởi tạo thỏa mãn các invariant
-3. Phân tích PO chi tiết
-(A) Initialisation PO
-Initialisation:
+
+| Loại PO | Ý nghĩa |
+|---------|---------|
+| WD (Well-Definedness) | Đảm bảo các biểu thức có nghĩa toán học |
+| INV (Invariant Preservation) | Kiểm chứng các invariant luôn đúng sau mỗi event |
+| FIS (Feasibility) | Chứng minh hành động trong event có thể thực hiện được |
+| INIT (Initialisation) | Chứng minh trạng thái khởi tạo thỏa mãn các invariant |
+
+---
+
+## 3. Phân tích PO chi tiết
+
+### (A) Initialisation PO
+```event-b
 act0: users ≔ ∅
-Cần chứng minh:
-Sau khi khởi tạo, các invariant inv1 và inv2 đều đúng.
-PO	Mệnh đề cần chứng minh	Giải thích
-INIT/inv1/INV	∅ ⊆ USER	Đúng vì ∅ luôn là tập con của mọi tập.
-INIT/inv2/INV	card(∅) ≤ maxUsers	0 ≤ maxUsers, đúng vì maxUsers > 0 theo axiom.
-Cả hai PO đều chứng minh được → trạng thái khởi tạo hợp lệ.
-(B) Event add_user
-Mục tiêu: thêm một người dùng mới u vào hệ thống.
+````
+
+**Cần chứng minh**: Sau khi khởi tạo, các invariant `inv1` và `inv2` đều đúng.
+
+| PO              | Mệnh đề cần chứng minh | Giải thích                                      |
+| --------------- | ---------------------- | ----------------------------------------------- |
+| `INIT/inv1/INV` | ∅ ⊆ USER               | ∅ luôn là tập con của mọi tập                   |
+| `INIT/inv2/INV` | card(∅) ≤ maxUsers     | 0 ≤ maxUsers, đúng vì `maxUsers > 0` theo axiom |
+
+> Cả hai PO đều chứng minh được → trạng thái khởi tạo hợp lệ.
+
+---
+
+### (B) Event `add_user`
+
+```event-b
 EVENT add_user
   ANY u
   WHERE
@@ -178,32 +204,47 @@ EVENT add_user
   THEN
     act1: users ≔ users ∪ {u}
 END
-(1) Well-Definedness PO
-Đảm bảo tất cả biểu thức hợp lệ:
-users ∪ {u} hợp lệ vì cả users và {u} là tập.
-card(users) có nghĩa vì users là tập hữu hạn (theo invariant).
-WD PO đều hợp lệ.
-(2) Feasibility PO
-Kiểm tra rằng hành động có thể thực hiện — tức là tồn tại u thỏa mãn các guard:
+```
+
+#### (1) Well-Definedness PO
+
+* Biểu thức `users ∪ {u}` hợp lệ vì cả `users` và `{u}` là tập.
+* `card(users)` có nghĩa vì `users` là tập hữu hạn (theo invariant).
+  => WD PO hợp lệ.
+
+#### (2) Feasibility PO
+
+* Cần tồn tại `u` thỏa mãn guard:
+
+```
 ∃ u · (u ∈ USER ∧ u ∉ users ∧ card(users) < maxUsers)
-→ Nếu USER không rỗng và card(users) < maxUsers, luôn tồn tại ít nhất một u mới chưa trong users.
-PO khả thi.
-(3) Invariant Preservation POs
-Cần chứng minh: sau khi thực hiện add_user, các invariant vẫn đúng.
+```
+
+→ Nếu `USER` không rỗng và `card(users) < maxUsers`, luôn tồn tại ít nhất một `u` mới chưa trong `users`.
+=> PO khả thi.
+
+#### (3) Invariant Preservation POs
+
 Giả sử:
-users ⊆ USER (từ inv1)
-card(users) ≤ maxUsers (từ inv2)
-u ∈ USER, u ∉ users, card(users) < maxUsers (từ guard)
-Cần chứng minh:
-Sau users ≔ users ∪ {u} thì:
-users ∪ {u} ⊆ USER
-card(users ∪ {u}) ≤ maxUsers
-PO	Mệnh đề cần chứng minh	Giải thích
-add_user/inv1/INV	(users ⊆ USER ∧ u ∈ USER) ⇒ (users ∪ {u} ⊆ USER)	Hợp của hai tập con của USER vẫn thuộc USER.
-add_user/inv2/INV	(card(users) < maxUsers ∧ u ∉ users) ⇒ (card(users ∪ {u}) ≤ maxUsers)	Khi thêm 1 phần tử mới, kích thước tăng 1 đơn vị, vẫn ≤ maxUsers.
-Cả hai đều được chứng minh hợp lệ → event bảo toàn invariant.
-(C) Event remove_user
-Mục tiêu: loại bỏ người dùng u khỏi hệ thống.
+
+* `users ⊆ USER`
+* `card(users) ≤ maxUsers`
+* `u ∈ USER, u ∉ users, card(users) < maxUsers`
+
+Cần chứng minh sau `users ≔ users ∪ {u}`:
+
+| PO                  | Mệnh đề cần chứng minh                                                | Giải thích                                                       |
+| ------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `add_user/inv1/INV` | (users ⊆ USER ∧ u ∈ USER) ⇒ (users ∪ {u} ⊆ USER)                      | Hợp của hai tập con của USER vẫn thuộc USER                      |
+| `add_user/inv2/INV` | (card(users) < maxUsers ∧ u ∉ users) ⇒ (card(users ∪ {u}) ≤ maxUsers) | Khi thêm 1 phần tử mới, kích thước tăng 1 đơn vị, vẫn ≤ maxUsers |
+
+> Cả hai đều được chứng minh hợp lệ → event bảo toàn invariant.
+
+---
+
+### (C) Event `remove_user`
+
+```event-b
 EVENT remove_user
   ANY u
   WHERE
@@ -211,30 +252,54 @@ EVENT remove_user
   THEN
     act1: users ≔ users \ {u}
 END
-(1) Well-Definedness PO
-Tất cả các biểu thức users \ {u} đều hợp lệ vì users là tập.
- WD hợp lệ.
-(2) Feasibility PO
-Đảm bảo hành động có thể thực hiện được, tức là tồn tại u ∈ users.
-Nếu users ≠ ∅, điều này đúng.
-PO khả thi.
-(3) Invariant Preservation POs
+```
+
+#### (1) Well-Definedness PO
+
+* Biểu thức `users \ {u}` hợp lệ vì `users` là tập.
+  => WD hợp lệ.
+
+#### (2) Feasibility PO
+
+* Cần tồn tại `u ∈ users`.
+* Nếu `users ≠ ∅`, điều này đúng.
+  => PO khả thi.
+
+#### (3) Invariant Preservation POs
+
 Giả sử:
-users ⊆ USER
-card(users) ≤ maxUsers
-u ∈ users
-Cần chứng minh rằng sau khi users ≔ users \ {u}, các invariant vẫn đúng.
-PO	Mệnh đề cần chứng minh	Giải thích
-remove_user/inv1/INV	(users ⊆ USER) ⇒ (users \ {u} ⊆ USER)	Khi bỏ 1 phần tử, tập vẫn là tập con của USER.
-remove_user/inv2/INV	(card(users) ≤ maxUsers ∧ u ∈ users) ⇒ (card(users \ {u}) ≤ maxUsers)	Khi xóa 1 phần tử, kích thước giảm → vẫn ≤ maxUsers.
-Cả hai PO đều đúng.
-4. Tổng hợp kết quả POs
-Loại PO	Initialisation	add_user	remove_user
-WD (Well-Definedness)	✓	✓	✓
-FIS (Feasibility)	–	✓	✓
-INV (Invariant Preservation)	✓	✓	✓
-INIT (Initialisation)	✓	–	–
-Tất cả các PO đều có thể chứng minh đúng → mô hình hợp lệ.
+
+* `users ⊆ USER`
+* `card(users) ≤ maxUsers`
+* `u ∈ users`
+
+Cần chứng minh sau `users ≔ users \ {u}`:
+
+| PO                     | Mệnh đề cần chứng minh                                                | Giải thích                                          |
+| ---------------------- | --------------------------------------------------------------------- | --------------------------------------------------- |
+| `remove_user/inv1/INV` | (users ⊆ USER) ⇒ (users \ {u} ⊆ USER)                                 | Khi bỏ 1 phần tử, tập vẫn là tập con của USER       |
+| `remove_user/inv2/INV` | (card(users) ≤ maxUsers ∧ u ∈ users) ⇒ (card(users \ {u}) ≤ maxUsers) | Khi xóa 1 phần tử, kích thước giảm → vẫn ≤ maxUsers |
+
+> Cả hai PO đều đúng.
+
+---
+
+## 4. Tổng hợp kết quả POs
+
+| Loại PO                      | Initialisation | add_user | remove_user |
+| ---------------------------- | -------------- | -------- | ----------- |
+| WD (Well-Definedness)        | ✓              | ✓        | ✓           |
+| FIS (Feasibility)            | –              | ✓        | ✓           |
+| INV (Invariant Preservation) | ✓              | ✓        | ✓           |
+| INIT (Initialisation)        | ✓              | –        | –           |
+
+> Tất cả các PO đều chứng minh đúng → mô hình hợp lệ.
+
+---
+
+## 5. Sơ đồ minh họa luồng PO trong Rodin
+
+```
 Context (C1) ──► Machine (M1)
                    │
                    ├── Invariants (inv1, inv2)
@@ -244,5 +309,13 @@ Context (C1) ──► Machine (M1)
                    ├── add_user → PO(WD), PO(FIS), PO(inv1), PO(inv2)
                    │
                    └── remove_user → PO(WD), PO(FIS), PO(inv1), PO(inv2)
+```
 
+```
 
+---
+
+Mình có thể tiếp tục **chèn thêm code block Event-B đầy đủ và đánh số PO giống như Rodin** để tài liệu Markdown trở thành bản “verification report” hoàn chỉnh cho khóa luận.  
+
+Bạn có muốn mình làm luôn không?
+```
