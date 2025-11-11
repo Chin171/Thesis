@@ -28,7 +28,9 @@ AXIOMS
     axm1: <biểu thức logic>   // ví dụ: maxUsers ∈ ℕ ∧ maxUsers > 0
 THEOREMS
     thm1: <mệnh đề có thể suy ra từ axioms>  // tùy chọn
-END```
+END
+```
+
 ```MACHINE <tên_machine>
 SEES
     <tên_context>     // liên kết với context ở trên
@@ -51,6 +53,19 @@ EVENTS
         END
 END
 ```
+| Thành phần         | Mô tả                                              | Ví dụ                                   |
+| ------------------ | -------------------------------------------------- | --------------------------------------- |
+| **SETS**           | Tập hợp trừu tượng (carrier set)                   | `USER`                                  |
+| **CONSTANTS**      | Hằng số dùng trong mô hình                         | `maxUsers`                              |
+| **AXIOMS**         | Các mệnh đề logic về hằng và tập                   | `maxUsers ∈ ℕ ∧ maxUsers > 0`           |
+| **VARIABLES**      | Biến trạng thái                                    | `users`                                 |
+| **INVARIANTS**     | Điều kiện bất biến phải đúng sau mọi event         | `users ⊆ USER ∧ card(users) ≤ maxUsers` |
+| **EVENTS**         | Các hành vi thay đổi trạng thái                    | `AddUser`, `RemoveUser`, ...            |
+| **GUARDS (WHERE)** | Điều kiện kích hoạt event                          | `u ∈ USER ∧ u ∉ users`                  |
+| **ACTIONS (THEN)** | Phép gán mô tả thay đổi trạng thái                 | `users := users ∪ {u}`                  |
+| **ANY**            | Khai báo biến cục bộ trong event                   | `ANY u WHERE ... THEN ... END`          |
+| **REFINES**        | Chỉ định mối quan hệ refinement giữa các machine   | `REFINES Machine_abstract`              |
+| **EXTENDS**        | Kế thừa sự kiện từ machine khác (nâng cấp hành vi) | `EXTENDS SomeEvent`                     |
 
 ### 2.1 Ký hiệu cơ bản
 
