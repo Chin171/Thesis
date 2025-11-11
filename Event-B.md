@@ -19,7 +19,8 @@ Một mô hình Event-B được cấu thành bởi hai cấu phần chính:
 
 * **Context**: mô tả phần tĩnh (static) của mô hình, bao gồm các tập hợp trừu tượng (SETS), hằng số (CONSTANTS) và tiên đề (AXIOMS). Context không thay đổi trong thời gian hoạt động hệ thống.
 * **Machine**: mô tả phần động (dynamic) — trạng thái và hành vi của hệ thống. Machine bao gồm biến trạng thái (VARIABLES), bất biến (INVARIANTS), và các sự kiện (EVENTS).
-```CONTEXT <tên_context>
+```
+CONTEXT <tên_context>
 SETS
     <tên_tập>    // ví dụ: USER
 CONSTANTS
@@ -31,7 +32,8 @@ THEOREMS
 END
 ```
 
-```MACHINE <tên_machine>
+```
+MACHINE <tên_machine>
 SEES
     <tên_context>     // liên kết với context ở trên
 VARIABLES
