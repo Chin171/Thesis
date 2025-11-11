@@ -76,6 +76,17 @@ END
 * `x ≔ expr` : phép gán (sau sự kiện) biến `x` nhận giá trị `expr`.
 * `∧`, `∨`, `⇒`, `¬` : các toán tử logic thông thường.
 * `card(X)` : số phần tử của tập `X`.
+* | Từ khóa       | Nghĩa               | Ghi nhớ         |
+| ------------- | ------------------- | --------------- |
+| `∈`, `∉`      | thuộc, không thuộc  | toán tử tập hợp |
+| `⊆`, `⊂`      | tập con             |                 |
+| `∪`, `\`, `∩` | hợp, hiệu, giao     |                 |
+| `↦`           | ánh xạ (maplet)     | `a ↦ b`         |
+| `∧`, `∨`, `¬` | và, hoặc, phủ định  | logic cơ bản    |
+| `∀`, `∃`      | với mọi, tồn tại    | lượng từ        |
+| `→`           | hàm (function type) | `USER → ℕ`      |
+| `card(S)`     | kích thước tập S    |                 |
+
 
 ### 2.2 Bất biến (Invariant)
 
