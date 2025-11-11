@@ -76,7 +76,7 @@ END
 * `x ≔ expr` : phép gán (sau sự kiện) biến `x` nhận giá trị `expr`.
 * `∧`, `∨`, `⇒`, `¬` : các toán tử logic thông thường.
 * `card(X)` : số phần tử của tập `X`.
-* | Từ khóa       | Nghĩa               | Ghi nhớ         |
+| Từ khóa       | Nghĩa               | Ghi nhớ         |
 | ------------- | ------------------- | --------------- |
 | `∈`, `∉`      | thuộc, không thuộc  | toán tử tập hợp |
 | `⊆`, `⊂`      | tập con             |                 |
@@ -86,6 +86,22 @@ END
 | `∀`, `∃`      | với mọi, tồn tại    | lượng từ        |
 | `→`           | hàm (function type) | `USER → ℕ`      |
 | `card(S)`     | kích thước tập S    |                 |
+
+Quan hệ và ánh xạ
+| Phép toán         | Ký hiệu            | Ý nghĩa                              | Ví dụ                            |                          |
+| ----------------- | ------------------ | ------------------------------------ | -------------------------------- | ------------------------ |
+| Ánh xạ (maplet)   | `↦`                | Cặp (a, b)                           | `1 ↦ "A"`                        |                          |
+| Tập ánh xạ        | `{a ↦ b, c ↦ d}`   | Tập hợp các maplet                   | `{1 ↦ "A", 2 ↦ "B"}`             |                          |
+| Quan hệ toàn phần | `S ↔ T`            | Tất cả quan hệ giữa S và T           |                                  |                          |
+| Hàm toàn phần     | `S → T`            | Mỗi phần tử S ánh xạ đến 1 phần tử T |                                  |                          |
+| Hàm một phần      | `S ⇸ T`            | Có thể không ánh xạ hết S            |                                  |                          |
+| Ánh xạ ngược      | `r~`               | Đảo ngược quan hệ                    | `(1 ↦ 2)~ = {2 ↦ 1}`             |                          |
+| Ánh xạ trái/phải  | `r[{x}]`, `r[{x}]` | Lấy phần tử theo vế                  | `f[{1}]` lấy giá trị ánh xạ từ 1 |                          |
+| Miền              | `dom(r)`           | Tập phần tử bên trái                 | `dom({1↦"A",2↦"B"}) = {1,2}`     |                          |
+| Vùng giá trị      | `ran(r)`           | Tập phần tử bên phải                 | `ran({1↦"A",2↦"B"}) = {"A","B"}` |                          |
+| Hợp quan hệ       | `r1 ∪ r2`          | Gộp hai quan hệ                      |                                  |                          |
+| Soạn quan hệ      | `r1 ; r2`          | Kết hợp                              | `r1 ; r2 = {(a,c)                | ∃b·(a,b)∈r1 ∧ (b,c)∈r2}` |
+
 
 
 ### 2.2 Bất biến (Invariant)
