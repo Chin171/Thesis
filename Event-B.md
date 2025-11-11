@@ -76,16 +76,23 @@ END
 * `x ≔ expr` : phép gán (sau sự kiện) biến `x` nhận giá trị `expr`.
 * `∧`, `∨`, `⇒`, `¬` : các toán tử logic thông thường.
 * `card(X)` : số phần tử của tập `X`.
-| Từ khóa       | Nghĩa               | Ghi nhớ         |
-| ------------- | ------------------- | --------------- |
-| `∈`, `∉`      | thuộc, không thuộc  | toán tử tập hợp |
-| `⊆`, `⊂`      | tập con             |                 |
-| `∪`, `\`, `∩` | hợp, hiệu, giao     |                 |
-| `↦`           | ánh xạ (maplet)     | `a ↦ b`         |
-| `∧`, `∨`, `¬` | và, hoặc, phủ định  | logic cơ bản    |
-| `∀`, `∃`      | với mọi, tồn tại    | lượng từ        |
-| `→`           | hàm (function type) | `USER → ℕ`      |
-| `card(S)`     | kích thước tập S    |                 |
+
+Tập hợp
+| Phép toán       | Ký hiệu   | Ý nghĩa                                | Ví dụ                            |
+| --------------- | --------- | -------------------------------------- | -------------------------------- |
+| Thuộc           | `∈`       | Kiểm tra phần tử trong tập             | `x ∈ S`                          |
+| Không thuộc     | `∉`       | Ngược lại                              | `x ∉ S`                          |
+| Tập con         | `⊆`       | `A` là tập con của `B`                 | `A ⊆ B`                          |
+| Tập con thực sự | `⊂`       | `A` là tập con *đúng* của `B`          | `A ⊂ B`                          |
+| Hợp             | `∪`       | Gộp hai tập                            | `{1,2} ∪ {2,3} = {1,2,3}`        |
+| Giao            | `∩`       | Phần chung                             | `{1,2} ∩ {2,3} = {2}`            |
+| Hiệu            | `\`       | Lấy phần khác                          | `{1,2,3} \ {2} = {1,3}`          |
+| Hiệu đối xứng   | `⊖`       | Phần tử chỉ có trong một trong hai tập | `{1,2} ⊖ {2,3} = {1,3}`          |
+| Phần tử đơn     | `{x}`     | Tập chỉ có phần tử x                   | `{u}`                            |
+| Rỗng            | `∅`       | Tập rỗng                               | `users := ∅`                     |
+| Kích thước      | `card(S)` | Số phần tử                             | `card({1,2,3}) = 3`              |
+| Bao đóng tập    | `POW(S)`  | Tập tất cả tập con của `S`             | `POW({1,2}) = {∅,{1},{2},{1,2}}` |
+
 
 Quan hệ và ánh xạ
 | Phép toán         | Ký hiệu            | Ý nghĩa                              | Ví dụ                            |                          |
@@ -102,6 +109,13 @@ Quan hệ và ánh xạ
 | Hợp quan hệ       | `r1 ∪ r2`          | Gộp hai quan hệ                      |                                  |                          |
 | Soạn quan hệ      | `r1 ; r2`          | Kết hợp                              | `r1 ; r2 = {(a,c)                | ∃b·(a,b)∈r1 ∧ (b,c)∈r2}` |
 
+Phép gán
+| Kiểu gán      | Ký hiệu      | Ý nghĩa                      | Ví dụ                     |
+| ------------- | ------------ | ---------------------------- | ------------------------- |
+| Gán giá trị   | `:=`         | Cập nhật biến                | `count := count + 1`      |
+| Hợp tập       | `:= S ∪ {x}` | Thêm phần tử                 | `users := users ∪ {u}`    |
+| Hiệu tập      | `:= S \ {x}` | Xóa phần tử                  | `users := users \ {u}`    |
+| Gán song song | `‖`          | Cập nhật nhiều biến cùng lúc | `x := x + 1 ‖ y := y - 1` |
 
 
 ### 2.2 Bất biến (Invariant)
