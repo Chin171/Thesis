@@ -1,7 +1,7 @@
-#Reference:
-#1. Rodin: an open toolset for modelling and reasoning in Event-B: https://eprints.soton.ac.uk/271058/1/main.pdf  
-#2.Event-B patterns and their tool support: https://www.research-collection.ethz.ch/server/api/core/bitstreams/e8cd8212-d14f-43f0-a42f-05d2b3b41df6/content.   
-#3. Decomposition Structures for Event-B: https://link.springer.com/chapter/10.1007/978-3-642-00255-7_2 
+##Reference:
+1. Rodin: an open toolset for modelling and reasoning in Event-B: https://eprints.soton.ac.uk/271058/1/main.pdf  
+2.Event-B patterns and their tool support: https://www.research-collection.ethz.ch/server/api/core/bitstreams/e8cd8212-d14f-43f0-a42f-05d2b3b41df6/content.   
+3. Decomposition Structures for Event-B: https://link.springer.com/chapter/10.1007/978-3-642-00255-7_2 
 #**Event-B — Khái niệm, lý thuyết và cơ chế hoạt động**
 
 
@@ -19,6 +19,38 @@ Một mô hình Event-B được cấu thành bởi hai cấu phần chính:
 
 * **Context**: mô tả phần tĩnh (static) của mô hình, bao gồm các tập hợp trừu tượng (SETS), hằng số (CONSTANTS) và tiên đề (AXIOMS). Context không thay đổi trong thời gian hoạt động hệ thống.
 * **Machine**: mô tả phần động (dynamic) — trạng thái và hành vi của hệ thống. Machine bao gồm biến trạng thái (VARIABLES), bất biến (INVARIANTS), và các sự kiện (EVENTS).
+```CONTEXT <tên_context>
+SETS
+    <tên_tập>    // ví dụ: USER
+CONSTANTS
+    <tên_hằng>   // ví dụ: maxUsers
+AXIOMS
+    axm1: <biểu thức logic>   // ví dụ: maxUsers ∈ ℕ ∧ maxUsers > 0
+THEOREMS
+    thm1: <mệnh đề có thể suy ra từ axioms>  // tùy chọn
+END```
+```MACHINE <tên_machine>
+SEES
+    <tên_context>     // liên kết với context ở trên
+VARIABLES
+    <tên_biến>        // ví dụ: users
+INVARIANTS
+    inv1: <điều kiện bất biến>   // ví dụ: users ⊆ USER ∧ card(users) ≤ maxUsers
+EVENTS
+    INITIALISATION
+        THEN
+            <các phép gán khởi tạo>  // ví dụ: users := ∅
+        END
+
+    <tên_sự_kiện>
+        ANY <biến_tự_do>            // tùy chọn
+        WHERE
+            <điều_kiện_bảo_vệ>      // guards
+        THEN
+            <hành_động>             // actions
+        END
+END
+```
 
 ### 2.1 Ký hiệu cơ bản
 
